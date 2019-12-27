@@ -13,6 +13,10 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const path = require('path')
 const initializePassport = require('./passport-config')
+const engine = require('ejs-locals');
+app.engine('ejs', engine);
+
+
 
 initializePassport(
   passport,
@@ -42,10 +46,11 @@ app.use(express.urlencoded({ extended: false }))
 // serve static files 
 app.use(express.static(path.join(__dirname, 'public')))
 
-// template engine
+// set the view engine to ejs
 app.set('view engine', 'ejs')
 
 app.get('/', checkAuthenticated, (req, res) => {
+    // use res.render to load up an ejs view file
     res.render('index.ejs', { name: req.user.name })
   })
   

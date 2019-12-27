@@ -1,3 +1,5 @@
+<% layout('layout') -%>
+
 <h1>Login</h1>
 <% if (messages.error) { %>
   <%= messages.error %>
@@ -5,12 +7,15 @@
 <form action="/login" method="POST">
   <div>
     <label for="email">Email</label>
+    <br>
     <input type="email" id="email" name="email" required>
   </div>
   <div>
     <label for="password">Password</label>
+    <br>
     <input type="password" id="password" name="password" required>
   </div>
+  <br>
   <button type="submit">Login</button>
 </form>
 <a href="/register">Register</a>

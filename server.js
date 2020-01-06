@@ -49,7 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // set the view engine to ejs
 app.set('view engine', 'ejs')
 
-app.get('/', checkAuthenticated, (req, res) => {
+app.get('/profile', checkAuthenticated, (req, res) => {
     // use res.render to load up an ejs view file
     res.render('index.ejs', { name: req.user.name })
   })

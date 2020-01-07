@@ -5,3 +5,9 @@
 #welcome {
     text-align: center
 }
+
+.nav-item {
+    margin-left: 10%;
+    font-size: 1.5em;
+    font-weight: 600;
+}

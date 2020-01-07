@@ -54,6 +54,18 @@ app.get('/', (req, res) => {
     res.render('home.ejs')
   })
 
+app.get('/indies', (req, res) => {
+    res.render('indie.ejs')
+  })
+
+app.get('/community', (req, res) => {
+    res.render('community.ejs')
+  })
+
+app.get('/about', (req, res) => {
+    res.render('about.ejs')
+  })
+
 app.get('/profile', checkAuthenticated, (req, res) => {
     res.render('index.ejs', { name: req.user.name })
   })

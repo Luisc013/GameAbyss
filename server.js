@@ -49,8 +49,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 // set the view engine to ejs
 app.set('view engine', 'ejs')
 
-app.get('/', checkAuthenticated, (req, res) => {
+app.get('/', (req, res) => {
     // use res.render to load up an ejs view file
+    res.render('home.ejs')
+  })
+
+app.get('/profile', checkAuthenticated, (req, res) => {
     res.render('index.ejs', { name: req.user.name })
   })
   
@@ -59,7 +63,7 @@ app.get('/', checkAuthenticated, (req, res) => {
   })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/profile',
     failureRedirect: '/login',
     failureFlash: true
   }))
@@ -98,7 +102,7 @@ function checkAuthenticated(req, res, next) {
 
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        return res.redirect('/')
+        return res.redirect('/profile')
     }
     next()
 }

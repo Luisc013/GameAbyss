@@ -13,48 +13,36 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const path = require('path')
 const initializePassport = require('./passport-config')
+const pg = require('pg')
 const engine = require('ejs-locals')
+const bodyParser = require('body-parser');
 app.engine('ejs', engine)
+//Database
+const database = require('./config/database.js')
 
+//Test database
+  database.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+//Initiating Passpot
 initializePassport(
-passport,
-email => users.find(user => user.email === email),
-id => users.find(user => user.id === id)
+  passport,
+  email => users.find(user => user.email === email),
+  id => users.find(user => user.id === id)
 )
 
-//fake DB
-// const {Client} = require('pg')
-// const client = new Client ({
-//   user: "postgres",
-//   password: "postgres",
-//   host: "lcarmona",
-//   port: 5432,
-//   database: "postgres"
-// })
-
-// // this is the non tri-catch method
-// client.connect()
-// // promise that after success logs a quote. the first then calls the next then. these are all one line functions
-// .then(() => console.log("Connected Successfully"))
-// .then(() => client.query("select * from users"))
-// // console has a method called .table that takes an array, loops thru it and prints into columns
-// .then(results => console.table(results.row))
-// // catches error
-// .catch(e => console.log())
-// // important to always terminate this connection with finally, the cleanup
-// .finally(() => client.end())
-
-
-
-
 const users = []
-
 // name of secret key in dotenv file, random string of number for security
 app.use(flash())
 app.use(session({
-secret: process.env.SESSION_SECRET,
-resave: false,
-saveUninitialized: false
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -63,7 +51,8 @@ app.use(methodOverride('_method'))
 
 
 // take forms and access them in req variables to pass them thru post methods
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // serve static files 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -77,8 +66,8 @@ res.render('home.ejs')
 })
 
 app.get('/indies', (req, res) => {
-res.render('indie.ejs')
-})
+  res.render('indie.ejs')
+  })
 
 app.get('/community', (req, res) => {
 res.render('community.ejs')
@@ -140,6 +129,10 @@ function checkNotAuthenticated(req, res, next) {
   }
   next()
 }
+
+//User routes
+app.use('/users', require('./routes/users'))
+
 
 module.exports = app
 const PORT = process.env.PORT || 3000;

@@ -7,140 +7,84 @@ if(process.env.NODE_ENV !== "production") {
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
+const bodyParser = require('body-parser')
 const passport = require('passport')
 const flash = require('express-flash')
+const expressLayouts = require('express-ejs-layouts')
 const session = require('express-session')
 const methodOverride = require('method-override')
 const path = require('path')
 const initializePassport = require('./passport-config')
 const engine = require('ejs-locals')
-app.engine('ejs', engine)
-
-initializePassport(
-passport,
-email => users.find(user => user.email === email),
-id => users.find(user => user.id === id)
-)
-
-//fake DB
-// const {Client} = require('pg')
-// const client = new Client ({
-//   user: "postgres",
-//   password: "postgres",
-//   host: "lcarmona",
-//   port: 5432,
-//   database: "postgres"
-// })
-
-// // this is the non tri-catch method
-// client.connect()
-// // promise that after success logs a quote. the first then calls the next then. these are all one line functions
-// .then(() => console.log("Connected Successfully"))
-// .then(() => client.query("select * from users"))
-// // console has a method called .table that takes an array, loops thru it and prints into columns
-// .then(results => console.table(results.row))
-// // catches error
-// .catch(e => console.log())
-// // important to always terminate this connection with finally, the cleanup
-// .finally(() => client.end())
 
 
+// route connections
+const indexRouter = require('./routes/index')
+app.use('/', indexRouter)
+const userRouter = require('./routes/users')
+app.use('/users', userRouter)
 
+//Mongoose Connection strings
+const mongoose = require('mongoose')
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true
+})
+const db = mongoose.connection
+db.on('error', error => console.error(error))
+db.once('open', () => console.log("Connected to Mongoose"))
 
-const users = []
-
-// name of secret key in dotenv file, random string of number for security
-app.use(flash())
-app.use(session({
-secret: process.env.SESSION_SECRET,
-resave: false,
-saveUninitialized: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(methodOverride('_method'))
-
-
-
-// take forms and access them in req variables to pass them thru post methods
-app.use(express.urlencoded({ extended: false }))
-
-// serve static files 
-app.use(express.static(path.join(__dirname, 'public')))
 
 // set the view engine to ejs
+app.engine('ejs', engine)
 app.set('view engine', 'ejs')
+app.set("layout", 'layouts/layout')
+app .use(expressLayouts)
 
-app.get('/', (req, res) => {
-// use res.render to load up an ejs view file
-res.render('home.ejs')
-})
 
-app.get('/indies', (req, res) => {
-res.render('indie.ejs')
-})
+// Body parser middleware
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}))
+app.use(express.urlencoded({ extended: false }))
 
-app.get('/community', (req, res) => {
-res.render('community.ejs')
-})
 
-app.get('/about', (req, res) => {
-res.render('about.ejs')
-})
+// set public folder
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/profile', checkAuthenticated, (req, res) => {
-res.render('index.ejs', { name: req.user.name })
-})
 
-app.get('/login', checkNotAuthenticated, (req, res) => {
-res.render('login.ejs')
-})
+//   initializePassport(
+  module.exports = app
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/profile',
-  failureRedirect: '/login',
-  failureFlash: true
-}))
 
-app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('register.ejs')
-})
 
-app.post('/register', checkNotAuthenticated, async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    users.push({
-      id: Date.now().toString(),
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword
-    })
-    res.redirect('/login')
-  } catch {
-    res.redirect('/register')
-  }
-})
+//   passport,
+//   email => users.find(user => user.email === email),
+//   id => users.find(user => user.id === id)
+//   )
 
-app.delete('/logout', (req, res) => {
-  req.logOut()
-  res.redirect('/login')
-})
+//   // name of secret key in dotenv file, random string of number for security
+//   // app.use(flash())
+//   // app.use(session({
+//   //   secret: process.env.SESSION_SECRET,
+//   //   resave: false,
+//   //   saveUninitialized: false
+//   // }))
+// app.use(passport.initialize())
+// app.use(passport.session())
+// app.use(methodOverride('_method'))
 
-//middle thatll text req,res and the next variable when we done with authentication
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-      return next()
-  }
-  res.redirect('/login')
-}
 
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-      return res.redirect('/profile')
-  }
-  next()
-}
+// //middle thatll text req,res and the next variable when we done with authentication
+// function checkAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) {
+//       return next()
+//   }
+//   res.redirect('/login')
+// }
 
-module.exports = app
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, console.log(`Server started on port ${PORT}`));
+// function checkNotAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) {
+//       return res.redirect('/profile')
+//   }
+//   next()
+// }

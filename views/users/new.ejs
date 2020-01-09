@@ -1,0 +1,8 @@
+<% layout('../layouts/layout') -%>
+<h1>Register</h1>
+<form action="/users" method="POST">
+  <%- include _form_fields %>
+  <button type="submit">Register</button>
+</form>
+<br>
+<a href="/login">Login</a>

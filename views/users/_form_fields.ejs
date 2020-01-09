@@ -1,15 +1,12 @@
-<% layout('layout') -%>
-<h1>Register</h1>
-<form action="/register" method="POST">
-  <div>
+<div>
     <label for="name">Username</label>
     <br>
-    <input type="text" id="name" name="name" required>
+    <input type="text" id="name" name="name" value="<%= user.name %>" required>
   </div>
   <div>
     <label for="email">Email</label>
     <br>
-    <input type="email" id="email" name="email" required>
+    <input type="email" id="email" name="email" placeholder="Enter Password" required>
   </div>
   <div>
     <label for="password">Password</label>
@@ -22,7 +19,3 @@
         <input type="birthday" id="birthday" name="birthday" required>
     </div>
   <br>
-  <button type="submit">Register</button>
-</form>
-<br>
-<a href="/login">Login</a>

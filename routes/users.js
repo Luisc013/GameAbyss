@@ -1,17 +1,20 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
+const passport = require('passport')
 const database = require('../config/database')
+
 //User Model import
 const User = require('../models/User')
+const { forwardAuthenticated } = require('../config/auth');
 
 
 
 //Get Users list
-router.get('/login', (req, res) => 
+router.get('/login', forwardAuthenticated, (req, res) => 
     res.render('login'))
 
-router.get('/register', (req, res) => 
+router.get('/register', forwardAuthenticated, (req, res) => 
 res.render('register'))
 
 //Add a User
@@ -44,7 +47,7 @@ router.post('/register', (req, res) => {
         .then(user => {
             if(user) {
                 //User exist
-                errors.push({ msg: 'Email is already registered'})
+                errors.push({ msg: 'Email exists!'})
                 res.render('register', {
                 errors,
                 name,
@@ -77,18 +80,22 @@ router.post('/register', (req, res) => {
             }
         })
     }
-
-    //Insert into table
-    // User.create({
-    //     name,
-    //     password,
-    //     email,
-    //     birthday,
-    //     fave_game
-    // })
-    // .then(user => res.redirect('/users'))
-    // .catch(err => console.log(err))
 })
 
-
-module.exports = router
+//Login Handler
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+      successRedirect: '/dashboard',
+      failureRedirect: '/users/login',
+      failureFlash: true
+    })(req, res, next);
+  });
+  
+  // Logout
+  router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/users/login');
+  });
+  
+  module.exports = router;

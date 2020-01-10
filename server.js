@@ -12,7 +12,6 @@ const session = require('express-session')
 const expressLayouts = require('express-ejs-layouts')
 const methodOverride = require('method-override')
 const path = require('path')
-const initializePassport = require('./passport-config')
 const pg = require('pg')
 const engine = require('ejs-locals')
 const bodyParser = require('body-parser');
@@ -20,6 +19,9 @@ const bodyParser = require('body-parser');
 app.engine('ejs', engine);
 //Database
 const database = require('./config/database.js')
+
+//Passport Config
+require('./config/passport')(passport);
 
 //Test database
   database.authenticate()
@@ -36,15 +38,21 @@ const database = require('./config/database.js')
     resave: true,
     saveUninitialized: true
   }))
+
+//Passport Middleware
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   //Express flash middleware
   app.use(flash())
 
   //Global variables for middleware
-  app.use((req, res, next) =>{
-    res.locals.success_msg = req.flash('success_msg')
-    res.locals.error_msg = req.flash('error_msg')
-    next()
-  })
+  app.use(function(req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+  });
   
   
   // body parser middleware
@@ -59,8 +67,8 @@ const database = require('./config/database.js')
   app.set('view engine', 'ejs')
 
   //User routes
-  app.use('/', require('./routes/index'))
-  app.use('/users', require('./routes/users'))
+  app.use('/', require('./routes/index.js'));
+  app.use('/users', require('./routes/users.js'));
   
   module.exports = app
   const PORT = process.env.PORT || 3000;

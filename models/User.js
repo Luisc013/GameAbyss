@@ -3,19 +3,20 @@ const database = require('../config/database')
 
 const User = database.define('user', {
     name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    required: true
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    required: true
   },
   email: {
-    type: Sequelize.STRING
-  },
-  birthday: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    required: true
   },
   fave_game: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    required: true
   }
 })
 

@@ -59,8 +59,20 @@ router.post('/register', (req, res) => {
                     email,
                     fave_game
                 })
-                console.log(newUser)
-                res.send('hello')
+                //Hash PW with bycrypt, generating salt for hash
+                bcrypt.genSalt(10, (err, salt) => 
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        if(err) throw err;
+                        // Set Password to hash for encryption
+                        newUser.password = hash
+                        //Save user
+                        newUser.save()
+                        .then(user =>{
+                            res.redirect('./login')
+                        })
+                        .catch(err => console.log(err))
+
+                }))
             }
         })
     }

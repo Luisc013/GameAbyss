@@ -4,32 +4,49 @@ const database = require('../config/database')
 const User = require('../models/User')
 
 //Get Users list
-router.get('/', (req, res) => 
-User.findAll()
-    .then(users => {
-        console.log(users)
-        res.sendStatus(200)
-    })
-    .catch(err => console.log(err))
-)
+router.get('/login', (req, res) => 
+    res.render('login'))
+
+router.get('/register', (req, res) => 
+res.render('register'))
 
 //Add a User
-router.get('/add', (req, res) => {
-    const data = {
-        name: 'Sham',
-      password: 'kill',
-      email: 'Sham@example.com'
+router.post('/register', (req, res) => {
+    const { name, password, email, birthday, fave_game } = req.body
+    let errors = []
+    
+    //error check required fields
+    if(!name || !password || !email || !birthday || !fave_game ) {
+        errors.push({ msg: "Please fill in all fields"})
     }
-    let { name, password, email } = data
+
+    //Check password length
+    if(password.length < 6) {
+        errors.push({msg: "Password should be at least 6 characters"})
+    }
+    if(errors.length > 0) {
+        res.render('register', {
+            errors,
+            name,
+            password,
+            email,
+            birthday,
+            fave_game
+        })
+    }   else {
+        res.send('pass')
+    }
 
     //Insert into table
-    User.create({
-        name,
-        password,
-        email
-    })
-    .then(user => res.redirect('/users'))
-    .catch(err => console.log(err))
+    // User.create({
+    //     name,
+    //     password,
+    //     email,
+    //     birthday,
+    //     fave_game
+    // })
+    // .then(user => res.redirect('/users'))
+    // .catch(err => console.log(err))
 })
 
 

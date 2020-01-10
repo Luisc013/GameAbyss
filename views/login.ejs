@@ -1,9 +1,5 @@
-<% layout('layout') -%>
 
 <h1>Login</h1>
-<% if (messages.error) { %>
-  <%= messages.error %>
-<% } %>
 <form action="/login" method="POST">
   <div>
     <label for="email">Email</label>
@@ -19,4 +15,4 @@
   <button type="submit">Login</button>
 </form>
 <br>
-<a href="/register">Register</a>
+<a href="/users/register">Register</a>

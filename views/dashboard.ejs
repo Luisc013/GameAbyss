@@ -1,13 +1,8 @@
-<% layout('layout') -%>
 
 <div class="jumbotron">
-  <h1 class="display-3">Hello, <%= name %></h1>
+  <h1 class="display-3">Hello, <%= user.name %></h1>
   <p class="lead">Now that you're in, close the door, turn off the lights and kill the goat. We must commence!!</p>
   <hr class="my-4">
   <p>If you're here for the indie developer content, you might as well just log out...</p>
-  <form action="/logout?_method=DELETE" method="POST">
-    <p class="lead">
-      <button class="btn btn-primary btn-lg" role="button" type="submit">Log out</button>
-    </p>
-</form>
+      <a href="/users/logout"><button class="btn btn-primary btn-lg" role="button" type="submit">Log out</button></a>
 </div>

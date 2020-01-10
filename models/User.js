@@ -10,6 +10,12 @@ const User = database.define('user', {
   },
   email: {
     type: Sequelize.STRING
+  },
+  birthday: {
+    type: Sequelize.STRING
+  },
+  fave_game: {
+    type: Sequelize.STRING
   }
 })
 

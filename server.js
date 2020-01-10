@@ -115,7 +115,7 @@ app.delete('/logout', (req, res) => {
   res.redirect('/login')
 })
 
-//middle thatll text req,res and the next variable when we done with authentication
+//middleware thatll text req, res and the next function when we done with authentication
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
       return next()

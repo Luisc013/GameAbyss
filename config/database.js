@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
+secretpw = process.env.SECRET_PW
 // Option 1: Passing parameters separately
-module.exports = new Sequelize('indieca', 'Lixus', SECRET_PW, {
+module.exports = new Sequelize('indiecadb', 'postgres', secretpw, {
   host: 'localhost',
   dialect:'postgres',
   pool: {

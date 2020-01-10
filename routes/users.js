@@ -6,9 +6,13 @@ const database = require('../config/database')
 
 //User Model import
 const User = require('../models/User')
-const { forwardAuthenticated } = require('../config/auth');
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
-
+router.get('/dashboard', ensureAuthenticated, (req, res) =>
+res.render('dashboard', {
+  user: req.user
+})
+);
 
 //Get Users list
 router.get('/login', forwardAuthenticated, (req, res) => 

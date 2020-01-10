@@ -2,8 +2,6 @@ const express = require('express')
 const router = express.Router()
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
-router.get('/', forwardAuthenticated, (req, res) => res.render('home'))
-
     router.get('/', (req, res) => {
       // use res.render to load up an ejs view file
       res.render('home.ejs')

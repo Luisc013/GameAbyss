@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const database = require('../config/database')
+//User Model import
 const User = require('../models/User')
 
 
@@ -37,7 +38,9 @@ router.post('/register', (req, res) => {
         })
     }   else {
         //Validation Success
-        User.findOne({ email: email})
+        User.findOne({
+        where: { email: email}
+        })
         .then(user => {
             if(user) {
                 //User exist

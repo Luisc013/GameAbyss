@@ -6,12 +6,10 @@
       <input type="text" id="title" name="title" values=<% typeof title != 'undefined' ? title: '' %> >
     </div>
     <br>
-    <div>
-      <label for="description">Description</label>
-      <br>
-      <input type="text" id="description" name="description" values=<% typeof description != 'undefined' ? description: '' %> >
+    <div class="form-group">
+      <label for="description">Post Deets</label>
+      <textarea class="form-control" id="exampleTextarea" rows="3" name="description" values=<% typeof description != 'undefined' ? description: '' %> > </textarea>
     </div>
-    <br>
     <button type="submit" value="add_post">Send</button>
   </form>
   <br>

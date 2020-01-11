@@ -26,14 +26,18 @@ module.exports = function(passport) {
       });
     })
   );
-
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
-
+  
   passport.deserializeUser(function(id, done) {
-    User.findByPk(id, function(err, user) {
-      done(err, user);
-    });
+    User.findByPk(id).then(function(user) {
+      console.log('deserializing user:',user);
+      done(null, user);
+    }).catch(function(err) {
+      if (err) {
+        throw err;
+      }
+   });
   });
 };

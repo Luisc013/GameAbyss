@@ -9,7 +9,8 @@ const { ensureAuthenticated} = require('../config/auth');
 
       router.get('/dashboard', ensureAuthenticated, (req, res) =>
       res.render('dashboard', {
-        name: req.user.name
+        name: req.user.name,
+        favegame: req.user.fave_game
       })
     );
     

@@ -1,0 +1,17 @@
+
+  <form action="/posts/add" method="POST">
+    <div>
+      <label for="title">Post Title</label>
+      <br>
+      <input type="text" id="title" name="title" values=<% typeof title != 'undefined' ? title: '' %> >
+    </div>
+    <br>
+    <div>
+      <label for="description">Description</label>
+      <br>
+      <input type="text" id="description" name="description" values=<% typeof description != 'undefined' ? description: '' %> >
+    </div>
+    <br>
+    <button type="submit" value="add_post">Send</button>
+  </form>
+  <br>

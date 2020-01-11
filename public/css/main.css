@@ -34,3 +34,13 @@
     background-color:indigo;
     color: antiquewhite
 }
+
+.bot {
+    bottom: 0;
+}
+
+#description {
+    height: 400px;
+    width: 400px;
+    font-size: 12pt;
+}

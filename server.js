@@ -71,6 +71,7 @@ require('./config/passport')(passport);
   //User routes
   app.use('/', require('./routes/index.js'));
   app.use('/users', require('./routes/users.js'));
+  app.use('/posts', require('./routes/posts'));
   
   module.exports = app
   const PORT = process.env.PORT || 3000;

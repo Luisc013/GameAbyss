@@ -1,0 +1,14 @@
+<div id="welcome">
+    <h1>All Posts</h1>
+    <br>
+    <%  for(var post of posts){ %>
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><%= post.title %></h5>
+      </div>
+      <p class="mb-3"><%= post.description %></p>
+    </a>
+  </div>
+  <br>
+  <% } %>

@@ -15,3 +15,32 @@
 .about-body {
     text-align: center;
 }
+
+.card {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.blockquote {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.card-body{
+    padding: 0
+}
+
+.card-header {
+    background-color:indigo;
+    color: antiquewhite
+}
+
+.bot {
+    bottom: 0;
+}
+
+#description {
+    height: 400px;
+    width: 400px;
+    font-size: 12pt;
+}

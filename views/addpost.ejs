@@ -1,0 +1,15 @@
+
+  <form action="/posts/add" method="POST">
+    <div>
+      <label for="title">Post Title</label>
+      <br>
+      <input type="text" id="title" name="title" values=<% typeof title != 'undefined' ? title: '' %> >
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="description">Post Deets</label>
+      <textarea class="form-control" id="exampleTextarea" rows="3" name="description" values=<% typeof description != 'undefined' ? description: '' %> > </textarea>
+    </div>
+    <button type="submit" value="add_post">Send</button>
+  </form>
+  <br>

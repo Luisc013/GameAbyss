@@ -1,5 +1,5 @@
 body {
-    background-color: #EDEDED;
+    background-color: #ffffff;
 }
 
 .container {
@@ -68,4 +68,14 @@ body {
     height: 400px;
     width: 400px;
     font-size: 12pt;
+}
+
+.top-stories {
+    background-color: #EDEDED;
+    padding: 5% 5%;
+}
+
+.stories {
+    display: flex;
+
 }

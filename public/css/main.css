@@ -78,11 +78,17 @@ body {
 .stories {
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .story-divs {
     border: black;
     border-style: double;
     margin-right: 5%;
+    overflow: hidden;
+}
+
+.story-divs img {
+    min-width: 100%;
+    min-height: 100%;
 }

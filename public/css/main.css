@@ -76,6 +76,13 @@ body {
 }
 
 .stories {
-    display: flex;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+}
 
+.story-divs {
+    border: black;
+    border-style: double;
+    margin-right: 5%;
 }

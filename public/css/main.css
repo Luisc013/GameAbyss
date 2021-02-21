@@ -2,10 +2,17 @@ body {
     background-color: #ffffff;
 }
 
+h2 {
+    font-weight: 400;
+    font-family: 'Fugaz One', cursive;
+    color: #17141F;
+}
+
 h4 {
     text-align: center;
     color: black;
-    font-weight: 600;
+    font-weight: 300;
+    font-family: 'Fugaz One', cursive;
 }
 
 .container {
@@ -21,20 +28,22 @@ h4 {
 
 .carousel-inner img {
     min-width: 100%;
-    height:fit-content;
-    object-fit:cover;
-    
+    height: fit-content;
+    object-fit: cover;
 }
 
 .nav-item {
-    margin-left: 10%;
-    font-size: 1.2em;
-    font-weight: 600;
+    margin-left: 13%;
+    font-size: 1.8em;
+    font-weight: 500;
 }
-
 
 .navbar {
     padding: 10px 5px;
+}
+
+.nav-link {
+    font-family: 'Fugaz One', cursive;
 }
 
 .navbar a img{
@@ -88,12 +97,11 @@ h4 {
     grid-template-rows: 1fr;
     /* grid-template-columns: repeat(5, 1fr); */
     grid-template-columns: repeat(3, 1fr);
-
 }
 
 .story-divs {
     float: left;
-    width: 100%;
+    width: 88%;
     padding-right: 5%;
 }
 

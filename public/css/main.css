@@ -2,8 +2,7 @@ body {
     background-color: #ffffff;
 }
 
-h2 {
-    font-weight: 400;
+h1, h2, h3 {
     font-family: 'Fugaz One', cursive;
     color: #17141F;
 }
@@ -11,7 +10,6 @@ h2 {
 h4 {
     text-align: center;
     color: black;
-    font-weight: 300;
     font-family: 'Fugaz One', cursive;
 }
 
@@ -54,19 +52,23 @@ h4 {
     margin-left: 5%;
 }
 
-.about-body {
-    text-align: center;
+.about-us {
+    padding: 1.75% 5%;
 }
+
+.about-us ul li {
+    list-style:none;
+    font-family: 'Fugaz One', cursive;
+    color: #17141F;
+    font-size: large;
+}
+
 
 .card {
     margin-left: 25%;
     margin-right: 25%;
 }
 
-.blockquote {
-    margin-left: 25%;
-    margin-right: 25%;
-}
 
 .card-body{
     padding: 0

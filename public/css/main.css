@@ -15,11 +15,14 @@ h4 {
 }
 
 .carousel-inner {
-    max-height: 60vh;
+    height: 37vh;
+    background-color: #EDEDED;
 }
 
 .carousel-inner img {
-    max-width:100%;
+    min-width: 100%;
+    height:fit-content;
+    object-fit:cover;
     
 }
 
@@ -89,10 +92,13 @@ h4 {
 }
 
 .story-divs {
-    margin-right: 5%;
+    float: left;
+    width: 100%;
+    padding-right: 5%;
 }
 
 .story-divs img {
-    max-width: 50vh;
-    max-height: 20vh;
+   height: 250px;
+   width: 100%;
+   cursor: pointer;
 }

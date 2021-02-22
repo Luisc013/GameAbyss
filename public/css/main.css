@@ -21,7 +21,7 @@ h4 {
 }
 
 .carousel-inner {
-    height: 37vh;
+    height: 50vh;
     background-color: #EDEDED;
 }
 
@@ -55,6 +55,38 @@ h4 {
 
 .layout-container {
     padding: 2.1% 5.6%;
+}
+
+#widget1 {
+    grid-area: "pro";
+}
+
+#widget2 {
+    grid-area: "design"
+}
+
+#widget3 {
+    grid-area: "user"
+}
+
+#widget4 {
+    grid-area: "unbiased"
+}
+
+.widget-showcase {
+    padding: 2.1% 5.6%;
+    background-color: #9147FF;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "pro design"
+    "user unbiased"
+    ;
+}
+
+.widget-showcase h2{
+    color: #ffffff;
 }
 
 .bot {

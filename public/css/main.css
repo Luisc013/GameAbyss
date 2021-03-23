@@ -1,9 +1,9 @@
 body {
-    background-color: #ffffff;
+    background-color: #EDEDED;
 }
 
 h1, h2, h3, label, button, a {
-    font-family: 'Fugaz One', cursive;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: #17141F;
     padding-top: 2.5px;
 }
@@ -11,7 +11,11 @@ h1, h2, h3, label, button, a {
 h4 {
     text-align: center;
     color: black;
-    font-family: 'Fugaz One', cursive;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+hr {
+    margin-top: 0;
 }
 
 .container {
@@ -28,11 +32,10 @@ h4 {
 .carousel-inner img {
     min-width: 100%;
     height: fit-content;
-    object-fit: cover;
+    object-fit: cover
 }
 
 .nav-item {
-    margin-left: 13%;
     font-size: 1.8em;
     font-weight: 500;
 }
@@ -42,15 +45,15 @@ h4 {
 }
 
 .nav-link {
-    font-family: 'Fugaz One', cursive;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .navbar a img{
-    margin-left: 50%;
+    margin-left: 70px;
 }
 
-.navbar-collapse  {
-    margin-left: 5%;
+.nav-toggler-icon {
+    margin-right: 500px;
 }
 
 .layout-container {
@@ -93,6 +96,10 @@ h4 {
     bottom: 0;
 }
 
+.dropdown {
+    display: none;
+}
+
 #description {
     height: 400px;
     width: 400px;
@@ -101,21 +108,13 @@ h4 {
 
 .top-stories {
     background-color: #EDEDED;
-    padding: 1.75% 5.6%;
+    padding: 2.52% 5.6%;
 }
 
-.stories {
-    display: grid;
-    grid-template-rows: 1fr;
-    /* grid-template-columns: repeat(5, 1fr); */
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.story-divs {
-    float: left;
-    width: 82%;
-    padding-right: 2%;
-    padding-left: 2%;
+.top-stories h1 {
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 0;
 }
 
 .story-divs img {
@@ -125,4 +124,14 @@ h4 {
 
 .story-divs h4 {
     margin-top: 10px;
+}
+
+.footer {
+    color: #ffffff;
+    background-color: #1E1E1E;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
 }

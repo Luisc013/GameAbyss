@@ -23,7 +23,7 @@ const { ensureAuthenticated} = require('../config/auth');
         })
         
         router.get('/about', (req, res) => {
-res.render('about.ejs')
-})
+        res.render('about.ejs')
+        })
 
 module.exports = router

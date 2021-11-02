@@ -37,8 +37,8 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
 ## Install
 
-    $ git clone git@github.com:Luisc013/Indieca.git
-    $ cd Indieca
+    $ git clone https://github.com/Luisc013/GameAbyss.git
+    $ cd GameAbyss
     $ npm install or npm i
 
 ## Running the project
